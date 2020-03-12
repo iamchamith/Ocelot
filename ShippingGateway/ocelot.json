@@ -1,0 +1,82 @@
+{
+  "ReRoutes": [
+    {
+      "Key": "User-Item",
+      "DownstreamPathTemplate": "/api/users/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/user-api/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "Key": "User",
+      "DownstreamPathTemplate": "/api/{query}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/user-api/{query}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "Key": "Item",
+      "DownstreamPathTemplate": "/api/{query}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/item-api/{query}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+
+    {
+      "Key": "Shipping-user",
+      "DownstreamPathTemplate": "/api/items/{id}/users",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/shipping-api/items/{id}/users",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "Key": "Shipping",
+      "DownstreamPathTemplate": "/api/{query}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/shipping-api/{query}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    }
+  ],
+  "Aggregates": [
+    {
+      "ReRouteKeys": [
+        "Shipping-user",
+        "User-Item"
+      ],
+      "UpstreamPathTemplate": "/user-shipping/{id}"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7000"
+  }
+}

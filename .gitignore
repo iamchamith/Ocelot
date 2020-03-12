@@ -1,0 +1,13 @@
+/ItemsModule/bin
+/ItemsModule/obj
+
+/ShippingGateway/bin
+/ShippingGateway/obj
+
+/ShippingModule/bin
+/ShippingModule/obj
+
+/UserModule/UserModule/bin
+/UserModule/UserModule/obj
+
+/UserModule/.vs
